@@ -41,7 +41,7 @@ npx tsx scripts/create-admin.ts "Full Name" email@example.com
 
 It will prompt for a password (not echoed) and hash it before storing.
 
-## 4. What's built so far (Phase 1)
+## 4. What's built so far (Phases 1–3)
 
 - Full nav restructure: Teachings · Bible Study · Teachers · Q & A · School of
   the Word · eBooks · Selah · News · Partner with us · Contact.
@@ -51,14 +51,19 @@ It will prompt for a password (not echoed) and hash it before storing.
 - Teachings: a new growing archive (model + list + detail pages).
 - eBooks: 3-D book-cover grid, parametric SVG covers in the site's own design
   language, per-book read-online + client-generated PDF download.
-- Selah, Partner with us: page shells with the approved copy, live but not yet
-  wired to data (Phase 2 / Phase 4).
+- Selah: persistent footer player (native `<audio>` for the ministry's own
+  recordings, the official YouTube IFrame API for embedded videos), language
+  filter, nothing plays automatically. No fake data was seeded — real tracks
+  come from the committee via the admin area.
+- Admin area (`/admin`, behind `/admin/login`): CRUD for eBooks (including
+  cover upload and the chapter editor), Teachings, Selah entries (enforcing
+  embed-link-or-own-upload at the form level), and News photos. The first
+  account is created with `scripts/create-admin.ts` — nothing is seeded.
+- Partner with us: page shell with the approved copy, not yet wired to real
+  payment details (Phase 4, blocked on the parish confirming the account).
 
 ## 5. Still to come
 
-- **Phase 2 — Selah**: persistent player, language filtering, embed/hosted
-  entries.
-- **Phase 3 — Admin area**: Auth.js login + CRUD for eBooks, Teachings, Selah
-  entries, News photos.
-- **Phase 4 — Partner with us**: real bank details, Paystack/Flutterwave,
-  once the parish confirms the account this page should use.
+- **Phase 4 — Partner with us**: real bank details, Paystack/Flutterwave
+  keys, once the parish confirms the account this page should use. Nothing
+  will be invented here — see the standing rule in the original brief.
