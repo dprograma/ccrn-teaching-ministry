@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+/* ===== Teaching Ministry design tokens ===== */
+:root {
+  --bg: #F7F4ED;
+  --card: #FFFFFF;
+  --ink: #141A24;
+  --muted: #5E6A79;
+  --line: #E4DFD3;
+  --navy: #13294B;
+  --navy2: #22406B;
+  --gold: #B08A32;
+  --goldl: #C9A14A;
+  --soft: #F1EADA;
+  --claret: #8C2F39;
+  --ok: #1E6B5B;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D121B;
+    --card: #151C28;
+    --ink: #E9E5DC;
+    --muted: #9AA4B3;
+    --line: #252E3D;
+    --navy: #060B14;
+    --navy2: #172539;
+    --gold: #D9B461;
+    --goldl: #E3C480;
+    --soft: #22201A;
+    --claret: #E08C96;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0D121B;
+  --card: #151C28;
+  --ink: #E9E5DC;
+  --muted: #9AA4B3;
+  --line: #252E3D;
+  --navy: #060B14;
+  --navy2: #172539;
+  --gold: #D9B461;
+  --goldl: #E3C480;
+  --soft: #22201A;
+  --claret: #E08C96;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-navy: var(--navy);
+  --color-navy2: var(--navy2);
+  --color-gold: var(--gold);
+  --color-goldl: var(--goldl);
+  --color-soft: var(--soft);
+  --color-claret: var(--claret);
+  --color-ok: var(--ok);
+
+  --font-display: var(--font-fraunces);
+  --font-serif: var(--font-source-serif);
+  --font-sans: var(--font-inter);
+}
+
+html {
+  scroll-padding-top: 90px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+::selection {
+  background: var(--goldl);
+  color: #141A24;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
