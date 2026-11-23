@@ -1,8 +1,30 @@
 import type { Metadata } from "next";
+import { prisma } from "@/lib/db";
+import { SelahBrowser } from "./selah-browser";
 
 export const metadata: Metadata = { title: "Selah" };
+export const dynamic = "force-dynamic";
 
-export default function SelahPage() {
+export default async function SelahPage() {
+  let study: Awaited<ReturnType<typeof prisma.selahEntry.findMany>> = [];
+  let worship: Awaited<ReturnType<typeof prisma.selahEntry.findMany>> = [];
+  let dbError = false;
+
+  try {
+    [study, worship] = await Promise.all([
+      prisma.selahEntry.findMany({
+        where: { section: "STUDY", published: true },
+        orderBy: { position: "asc" },
+      }),
+      prisma.selahEntry.findMany({
+        where: { section: "WORSHIP", published: true },
+        orderBy: { position: "asc" },
+      }),
+    ]);
+  } catch {
+    dbError = true;
+  }
+
   return (
     <div className="mx-auto max-w-xl px-4">
       <div
@@ -28,14 +50,6 @@ export default function SelahPage() {
       </p>
 
       <div className="bg-soft rounded-2xl p-5 my-5">
-        <div className="text-[10.5px] font-bold tracking-[0.14em] uppercase text-gold mb-1.5">
-          For study and quiet time
-        </div>
-        <p className="font-serif text-base leading-relaxed">
-          Music to keep underneath the work. These are instrumental and gentle, chosen so that
-          they do not compete with the text in front of you. Start it, leave it, and let it hold
-          the room while you prepare.
-        </p>
         <p className="font-serif text-base leading-relaxed m-0">
           <b>A word on silence.</b> The best preparation is sometimes no sound at all.{" "}
           <em>Be still, and know that I am God</em> (Psalm 46:10). Use the music where it helps
@@ -44,23 +58,30 @@ export default function SelahPage() {
         </p>
       </div>
 
-      <div className="bg-soft rounded-2xl p-5 my-5">
-        <div className="text-[10.5px] font-bold tracking-[0.14em] uppercase text-claret mb-1.5">
-          For worship and praise
-        </div>
-        <p className="font-serif text-base leading-relaxed m-0">
-          Songs that preach. Every song gathered here points to Christ and to his finished work —
-          not to our striving, not to our fear, not to what we must do to be accepted. Sing them
-          in the car, in the kitchen, before the meeting, and let the doctrine go in with the
-          melody. People remember what they sing long after they forget what they were told.
-        </p>
-      </div>
+      <p className="font-serif text-[17px] leading-relaxed">
+        Songs that preach. Every song gathered here points to Christ and to his finished work —
+        not to our striving, not to our fear, not to what we must do to be accepted. Sing them in
+        the car, in the kitchen, before the meeting, and let the doctrine go in with the melody.
+        People remember what they sing long after they forget what they were told.
+      </p>
 
-      <div className="border border-dashed border-line rounded-2xl p-5 text-center text-muted text-sm leading-relaxed">
-        The listening library — organised by language, with the persistent player — is being
-        built. Every entry will link to its official source, except the ministry&rsquo;s own
-        recordings, which we host ourselves.
-      </div>
+      {dbError && (
+        <div className="border border-dashed border-line rounded-2xl p-5 text-center text-muted text-sm leading-relaxed mt-4">
+          The listening library isn&rsquo;t connected yet. Once the database is live, entries the
+          committee adds will appear here.
+        </div>
+      )}
+
+      {!dbError && study.length === 0 && worship.length === 0 && (
+        <div className="border border-dashed border-line rounded-2xl p-5 text-center text-muted text-sm leading-relaxed mt-4">
+          Nothing published yet. The committee can add the first entries from the admin area.
+        </div>
+      )}
+
+      {!dbError && (study.length > 0 || worship.length > 0) && (
+        <SelahBrowser study={study} worship={worship} />
+      )}
+
       <div className="h-8" />
     </div>
   );

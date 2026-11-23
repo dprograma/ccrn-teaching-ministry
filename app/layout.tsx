@@ -3,7 +3,8 @@ import { Fraunces, Source_Serif_4, Inter } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
-import { PlayerBar } from "@/components/player-bar";
+import { PlayerProvider } from "@/components/selah/player-context";
+import { SelahPlayerBar } from "@/components/selah/selah-player-bar";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -52,10 +53,12 @@ export default function RootLayout({
       className={`${fraunces.variable} ${sourceSerif.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-bg text-ink">
-        <Nav />
-        <main className="flex-1 pb-24">{children}</main>
-        <Footer />
-        <PlayerBar />
+        <PlayerProvider>
+          <Nav />
+          <main className="flex-1 pb-24">{children}</main>
+          <Footer />
+          <SelahPlayerBar />
+        </PlayerProvider>
       </body>
     </html>
   );
