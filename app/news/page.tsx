@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/content/curriculum";
+import { prisma } from "@/lib/db";
 
 export const metadata: Metadata = { title: "News" };
+export const dynamic = "force-dynamic";
 
-export default function NewsPage() {
+export default async function NewsPage() {
+  let photos: Awaited<ReturnType<typeof prisma.newsPhoto.findMany>> = [];
+  try {
+    photos = await prisma.newsPhoto.findMany({ orderBy: { position: "asc" } });
+  } catch {
+    // The photo gallery degrades gracefully if the database isn't connected yet.
+  }
+
   return (
     <div className="mx-auto max-w-2xl px-4">
       <div
@@ -38,10 +47,29 @@ export default function NewsPage() {
         </div>
       ))}
 
-      <div className="border border-dashed border-line rounded-2xl p-5 text-center text-muted text-sm leading-relaxed mt-3">
-        Photographs from our programmes will appear here once the committee adds them through the
-        admin area.
-      </div>
+      {photos.length > 0 ? (
+        <>
+          <h2 className="text-[11.5px] font-bold tracking-[0.14em] uppercase text-muted mt-7 mb-2.5 pb-1.5 border-b border-line">
+            Photographs
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {photos.map((p) => (
+              <figure key={p.id} className="rounded-xl overflow-hidden border border-line bg-card">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.url} alt={p.caption ?? ""} className="w-full aspect-square object-cover" />
+                {p.caption && (
+                  <figcaption className="text-[11.5px] text-muted p-2">{p.caption}</figcaption>
+                )}
+              </figure>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="border border-dashed border-line rounded-2xl p-5 text-center text-muted text-sm leading-relaxed mt-3">
+          Photographs from our programmes will appear here once the committee adds them through
+          the admin area.
+        </div>
+      )}
       <div className="h-8" />
     </div>
   );
