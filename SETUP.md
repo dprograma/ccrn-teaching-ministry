@@ -62,8 +62,24 @@ It will prompt for a password (not echoed) and hash it before storing.
 - Partner with us: page shell with the approved copy, not yet wired to real
   payment details (Phase 4, blocked on the parish confirming the account).
 
-## 5. Still to come
+## 5. Partner with us (Phase 4) — built, waiting on real values
 
-- **Phase 4 — Partner with us**: real bank details, Paystack/Flutterwave
-  keys, once the parish confirms the account this page should use. Nothing
-  will be invented here — see the standing rule in the original brief.
+The giving page and the whole payment flow are implemented and building
+clean, but deliberately inert until real values replace the placeholders:
+
+- `NEXT_PUBLIC_BANK_ACCOUNT_NAME` / `NEXT_PUBLIC_BANK_ACCOUNT_NUMBER` /
+  `NEXT_PUBLIC_BANK_NAME` — shown with a copy button. While any of these
+  stay as `PLACEHOLDER…`, the page shows "details will appear here" instead.
+- `PAYSTACK_SECRET_KEY` (NGN) / `FLUTTERWAVE_SECRET_KEY` (USD) — server-only;
+  the giving form redirects to each provider's own hosted checkout page and
+  verifies server-side when they redirect back to `/partner/thank-you`. No
+  public key, no third-party script, no card details ever touch this site.
+  While either stays `PLACEHOLDER`, the "Give online" section shows the same
+  kind of not-yet-switched-on notice.
+
+**These are read at build time** (the page is statically prerendered), so
+after setting the real values in Vercel, trigger a redeploy for them to take
+effect — a new `git push` does this automatically.
+
+Nothing has been invented here — see the standing rule in the original
+brief.
