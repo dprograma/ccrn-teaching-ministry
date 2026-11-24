@@ -16,22 +16,15 @@
   --ok: #1E6B5B;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0D121B;
-    --card: #151C28;
-    --ink: #E9E5DC;
-    --muted: #9AA4B3;
-    --line: #252E3D;
-    --navy: #060B14;
-    --navy2: #172539;
-    --gold: #D9B461;
-    --goldl: #E3C480;
-    --soft: #22201A;
-    --claret: #E08C96;
-  }
-}
-
+/*
+ * No automatic prefers-color-scheme switch: the ministry asked for a light,
+ * white-forward design specifically, and letting the OS/browser dark-mode
+ * setting silently override that (as it did before this comment was added)
+ * produced real contrast bugs most visitors would just see as "broken" with
+ * no way to know why their site looked different from what was agreed.
+ * A manual dark theme remains available by setting data-theme="dark" on
+ * <html>, for whenever a real toggle is wanted.
+ */
 :root[data-theme="dark"] {
   --bg: #0D121B;
   --card: #151C28;

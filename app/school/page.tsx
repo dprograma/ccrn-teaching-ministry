@@ -7,6 +7,39 @@ export const metadata: Metadata = { title: "School of the Word" };
 
 const TRACK_COLORS = ["#13294B", "#8C2F39", "#1E6B5B", "#6B3F8C"];
 
+function TrackLink({
+  href,
+  color,
+  kicker,
+  title,
+  meta,
+  blurb,
+}: {
+  href: string;
+  color: string;
+  kicker: string;
+  title: string;
+  meta: string;
+  blurb: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="relative block w-full text-left border border-line rounded-2xl overflow-hidden bg-card p-[18px]"
+    >
+      <div className="absolute left-0 top-0 bottom-0 w-1" style={{ background: color }} aria-hidden="true" />
+      <span className="block text-[10.5px] font-bold tracking-[0.16em] uppercase" style={{ color }}>
+        {kicker}
+      </span>
+      <span className="block font-display text-[21px] font-semibold leading-tight mt-1">
+        {title}
+      </span>
+      <span className="block text-[12.5px] mt-1.5 text-muted font-semibold">{meta}</span>
+      <span className="block text-sm text-muted leading-relaxed mt-3">{blurb}</span>
+    </Link>
+  );
+}
+
 export default function SchoolPage() {
   const totalClasses = SCHOOL.tracks.reduce((a, t) => a + t.classes, 0);
 
@@ -24,7 +57,7 @@ export default function SchoolPage() {
         }
       />
 
-      <div className="border border-claret rounded-2xl p-[17px] my-4 bg-card max-w-2xl">
+      <div className="border border-claret rounded-2xl p-[17px] my-4 bg-card">
         <div className="flex items-center gap-2 text-[10.5px] font-bold tracking-[0.13em] uppercase text-claret mb-1.5">
           Please read this first
         </div>
@@ -32,76 +65,49 @@ export default function SchoolPage() {
           {SCHOOL.caveat.lead}
         </div>
         {SCHOOL.caveat.p.map((p, i) => (
-          <p key={i} className="font-serif text-base leading-relaxed mb-2.5 last:mb-0">
+          <p key={i} className="font-serif text-base leading-relaxed mb-2.5 last:mb-0 max-w-3xl">
             {p}
           </p>
         ))}
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {SCHOOL.tracks.map((t, i) => (
-        <Link
-          key={t.n}
-          href={`/school/track/${t.n}`}
-          className="block w-full text-left border border-line rounded-[18px] overflow-hidden bg-card"
-        >
-          <div className="p-4 text-white" style={{ background: TRACK_COLORS[i % TRACK_COLORS.length] }}>
-            <span className="block text-[10.5px] font-bold tracking-[0.16em] uppercase opacity-85">
-              Track {t.n} · {t.level}
-            </span>
-            <span className="block font-display text-[23px] font-semibold leading-tight mt-0.5">
-              {t.name}
-            </span>
-            <span className="block text-[12.5px] mt-1.5 opacity-90 font-semibold">
-              {t.weeks} weeks · {t.classes} classes · 7 a week
-            </span>
-          </div>
-          <div className="p-4 text-sm text-muted leading-relaxed">{t.blurb}</div>
-        </Link>
-      ))}
+        {SCHOOL.tracks.map((t, i) => (
+          <TrackLink
+            key={t.n}
+            href={`/school/track/${t.n}`}
+            color={TRACK_COLORS[i % TRACK_COLORS.length]}
+            kicker={`Track ${t.n} · ${t.level}`}
+            title={t.name}
+            meta={`${t.weeks} weeks · ${t.classes} classes · 7 a week`}
+            blurb={t.blurb}
+          />
+        ))}
 
-      <Link
-        href="/school/electives"
-        className="block w-full text-left border border-line rounded-[18px] overflow-hidden bg-card"
-      >
-        <div className="p-4 text-white" style={{ background: TRACK_COLORS[3] }}>
-          <span className="block text-[10.5px] font-bold tracking-[0.16em] uppercase opacity-85">
-            Track 4 · {SCHOOL.electives.level}
-          </span>
-          <span className="block font-display text-[23px] font-semibold leading-tight mt-0.5">
-            {SCHOOL.electives.name}
-          </span>
-          <span className="block text-[12.5px] mt-1.5 opacity-90 font-semibold">
-            {SCHOOL.electives.series.length} elective series · open enrolment
-          </span>
-        </div>
-        <div className="p-4 text-sm text-muted leading-relaxed">{SCHOOL.electives.blurb}</div>
-      </Link>
+        <TrackLink
+          href="/school/electives"
+          color={TRACK_COLORS[3]}
+          kicker={`Track 4 · ${SCHOOL.electives.level}`}
+          title={SCHOOL.electives.name}
+          meta={`${SCHOOL.electives.series.length} elective series · open enrolment`}
+          blurb={SCHOOL.electives.blurb}
+        />
 
-      <Link
-        href="/school/workshop"
-        className="block w-full text-left border border-line rounded-[18px] overflow-hidden bg-card"
-      >
-        <div className="p-4" style={{ background: "var(--claret)" }}>
-          <span className="block text-[10.5px] font-bold tracking-[0.16em] uppercase text-white/85">
-            Advanced growth &amp; depth
-          </span>
-          <span className="block font-display text-[23px] font-semibold leading-tight mt-0.5 text-white">
-            Bible Study Workshop &amp; Special Sessions
-          </span>
-          <span className="block text-[12.5px] mt-1.5 text-white/90 font-semibold">
-            {WORKSHOP.sessions.length} subjects · held three times a year
-          </span>
-        </div>
-        <div className="p-4 text-sm text-muted leading-relaxed">{WORKSHOP.intro}</div>
-      </Link>
+        <TrackLink
+          href="/school/workshop"
+          color="var(--claret)"
+          kicker="Advanced growth & depth"
+          title="Bible Study Workshop & Special Sessions"
+          meta={`${WORKSHOP.sessions.length} subjects · held three times a year`}
+          blurb={WORKSHOP.intro}
+        />
       </div>
 
-      <div className="bg-soft rounded-2xl p-4 px-[18px] my-4 max-w-2xl">
+      <div className="bg-soft rounded-2xl p-4 px-[18px] my-4">
         <div className="text-[10.5px] font-bold tracking-[0.13em] uppercase text-claret mb-1.5">
           Truth That Sets Free
         </div>
-        <p className="font-serif text-[16.5px] leading-relaxed m-0">{SCHOOL.note}</p>
+        <p className="font-serif text-[16.5px] leading-relaxed m-0 max-w-3xl">{SCHOOL.note}</p>
       </div>
 
       <h3 className="text-[11.5px] font-bold tracking-[0.14em] uppercase text-muted mt-6 mb-2.5 pb-1.5 border-b border-line">

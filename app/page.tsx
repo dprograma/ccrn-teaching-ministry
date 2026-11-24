@@ -80,8 +80,8 @@ export default function Home() {
           <h2 className="text-[13px] font-bold tracking-[0.13em] uppercase text-muted mb-2.5">
             {SITE.id.ministry}
           </h2>
-          <div className="bg-card border border-line rounded-2xl p-[18px] max-w-3xl">
-            <p className="font-serif text-base leading-relaxed m-0">{SITE.welcome}</p>
+          <div className="bg-card border border-line rounded-2xl p-[18px]">
+            <p className="font-serif text-base leading-relaxed m-0 max-w-3xl">{SITE.welcome}</p>
           </div>
         </section>
 

@@ -6,28 +6,32 @@ import type { Theme } from "@/lib/content/types";
 export const metadata: Metadata = { title: "Bible Study" };
 
 function ThemeCard({ theme }: { theme: Theme }) {
+  const accent = themeAccent(theme);
   return (
     <Link
       href={`/bible-study/${theme.id}`}
-      className="block w-full border border-line rounded-2xl overflow-hidden bg-card"
+      className="relative block w-full border border-line rounded-2xl overflow-hidden bg-card p-4"
     >
       <div
-        className="px-4 py-3.5 flex items-center gap-3 text-white"
-        style={{ background: themeAccent(theme) }}
-      >
-        <span className="font-display text-[23px] font-bold opacity-70 leading-none">
+        className="absolute left-0 top-0 bottom-0 w-1"
+        style={{ background: accent }}
+        aria-hidden="true"
+      />
+      <div className="flex items-start gap-3">
+        <span
+          className="shrink-0 w-9 h-9 rounded-full border-2 grid place-items-center font-display font-bold text-[15px]"
+          style={{ borderColor: accent, color: accent }}
+        >
           {theme.n}
         </span>
-        <span className="font-display text-[18.5px] font-semibold leading-tight">
+        <span className="font-display text-[17.5px] font-semibold leading-tight mt-1">
           {theme.title}
         </span>
       </div>
-      <div className="px-4 pt-3 pb-3.5">
-        <span className="block text-[14px] text-muted leading-snug">{theme.emph}</span>
-        <span className="flex items-center gap-2 mt-2.5 text-[12px] text-muted font-semibold">
-          {theme.lessons.length} lessons
-        </span>
-      </div>
+      <span className="block text-[14px] text-muted leading-snug mt-3">{theme.emph}</span>
+      <span className="flex items-center gap-2 mt-2.5 text-[12px] text-muted font-semibold">
+        {theme.lessons.length} lessons
+      </span>
     </Link>
   );
 }

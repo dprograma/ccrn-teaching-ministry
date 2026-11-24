@@ -32,6 +32,7 @@ export function Nav() {
   }, [open]);
 
   return (
+    <>
     <header className="sticky top-0 z-40 bg-bg/95 backdrop-blur border-b border-line">
       <div className="mx-auto max-w-6xl px-4 h-16 flex items-center gap-6">
         <Link href="/" className="flex items-center gap-2 shrink-0" onClick={() => setOpen(false)}>
@@ -74,45 +75,51 @@ export function Nav() {
           )}
         </button>
       </div>
+    </header>
 
-      {/* Mobile drawer */}
+    {/* Mobile drawer — a sibling of <header>, not a child: header has
+        backdrop-blur (a CSS filter), and per spec any element with a
+        filter/backdrop-filter becomes the containing block for its
+        position:fixed descendants, so nesting the drawer inside header
+        positioned it relative to the 64px nav bar instead of the
+        viewport. */}
+    <div
+      className={`lg:hidden fixed inset-0 z-50 transition-opacity ${
+        open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      }`}
+    >
       <div
-        className={`lg:hidden fixed inset-0 z-50 transition-opacity ${
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        className="absolute inset-0 bg-navy/40"
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+      />
+      <div
+        className={`absolute right-0 top-0 bottom-0 w-[82vw] max-w-sm bg-card shadow-2xl transition-transform duration-200 flex flex-col ${
+          open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div
-          className="absolute inset-0 bg-navy/40"
-          onClick={() => setOpen(false)}
-          aria-hidden="true"
-        />
-        <div
-          className={`absolute right-0 top-0 bottom-0 w-[82vw] max-w-sm bg-card shadow-2xl transition-transform duration-200 ${
-            open ? "translate-x-0" : "translate-x-full"
-          }`}
-        >
-          <div className="h-16 flex items-center gap-2 px-5 border-b border-line">
-            <Crest className="w-6 h-6 text-navy" />
-            <span className="font-display font-semibold text-ink">Menu</span>
-          </div>
-          <nav className="p-3 flex flex-col">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`px-4 py-3 rounded-xl text-[15.5px] font-medium ${
-                  isActive(pathname, item.href) ? "bg-soft text-gold" : "text-ink"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <div className="px-5 py-4 mt-auto text-[13px] text-muted border-t border-line">
-            <em className="font-serif not-italic">Otito dịrị Jesu</em>
-          </div>
+        <div className="h-16 flex items-center gap-2 px-5 border-b border-line shrink-0">
+          <Crest className="w-6 h-6 text-navy" />
+          <span className="font-display font-semibold text-ink">Menu</span>
+        </div>
+        <nav className="p-3 flex flex-col overflow-y-auto">
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`px-4 py-3 rounded-xl text-[15.5px] font-medium ${
+                isActive(pathname, item.href) ? "bg-soft text-gold" : "text-ink"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="px-5 py-4 mt-auto text-[13px] text-muted border-t border-line shrink-0">
+          <em className="font-serif not-italic">Otito dịrị Jesu</em>
         </div>
       </div>
-    </header>
+    </div>
+    </>
   );
 }

@@ -50,7 +50,7 @@ export default async function WeekPage({
         </h1>
       </div>
 
-      <div className="flex gap-2.5 items-start border-l-[3px] border-claret bg-soft rounded-r-xl p-3 px-3.5 my-3.5 text-[14.5px] leading-snug max-w-2xl">
+      <div className="flex gap-2.5 items-start border-l-[3px] border-claret bg-soft rounded-r-xl p-3 px-3.5 my-3.5 text-[14.5px] leading-snug">
         <b className="text-claret">Syllabus, not the full lesson.</b> The teaching is given live
         in the ministry&rsquo;s training sessions.
       </div>

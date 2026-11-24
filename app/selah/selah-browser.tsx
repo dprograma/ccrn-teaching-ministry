@@ -90,25 +90,31 @@ export function SelahBrowser({
         ))}
       </div>
 
-      <h2 className="text-[11.5px] font-bold tracking-[0.14em] uppercase text-gold mt-6 mb-2.5">
-        For study and quiet time
-      </h2>
-      {filteredStudy.length === 0 && (
-        <p className="text-muted text-sm mb-4">Nothing in this language yet.</p>
-      )}
-      {filteredStudy.map((e) => (
-        <EntryRow key={e.id} entry={e} />
-      ))}
+      <div className="grid lg:grid-cols-2 gap-x-8 gap-y-8">
+        <section>
+          <h2 className="text-[11.5px] font-bold tracking-[0.14em] uppercase text-gold mb-3">
+            For study and quiet time
+          </h2>
+          {filteredStudy.length === 0 && (
+            <p className="text-muted text-sm mb-4">Nothing in this language yet.</p>
+          )}
+          {filteredStudy.map((e) => (
+            <EntryRow key={e.id} entry={e} />
+          ))}
+        </section>
 
-      <h2 className="text-[11.5px] font-bold tracking-[0.14em] uppercase text-claret mt-8 mb-2.5">
-        For worship and praise
-      </h2>
-      {filteredWorship.length === 0 && (
-        <p className="text-muted text-sm mb-4">Nothing in this language yet.</p>
-      )}
-      {filteredWorship.map((e) => (
-        <EntryRow key={e.id} entry={e} />
-      ))}
+        <section>
+          <h2 className="text-[11.5px] font-bold tracking-[0.14em] uppercase text-claret mb-3">
+            For worship and praise
+          </h2>
+          {filteredWorship.length === 0 && (
+            <p className="text-muted text-sm mb-4">Nothing in this language yet.</p>
+          )}
+          {filteredWorship.map((e) => (
+            <EntryRow key={e.id} entry={e} />
+          ))}
+        </section>
+      </div>
     </div>
   );
 }
