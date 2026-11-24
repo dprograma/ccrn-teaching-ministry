@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CopyButton } from "@/components/ui/copy-button";
 import { GiveForm } from "./give-form";
+import { Banner } from "@/components/ui/banner";
 
 export const metadata: Metadata = { title: "Partner with us" };
 
@@ -26,22 +27,12 @@ export default function PartnerPage() {
   const onlineReady = givingConfigured();
 
   return (
-    <div className="mx-auto max-w-xl px-4">
-      <div
-        className="rounded-2xl p-5 text-white mt-4 mb-5"
-        style={{ background: "linear-gradient(160deg, var(--navy2), var(--navy))" }}
-      >
-        <div className="text-[11px] tracking-[0.2em] uppercase opacity-80 font-bold">
-          Free-will giving
-        </div>
-        <h1 className="text-[26px] mt-1.5 mb-2 text-white font-display font-semibold">
-          Partner with us
-        </h1>
-        <div className="font-serif italic text-[16px] leading-relaxed opacity-95">
-          What you give supports the teaching, the training of teachers, the workshops and the
-          materials this ministry produces and shares freely.
-        </div>
-      </div>
+    <div className="mx-auto max-w-2xl px-4">
+      <Banner
+        kicker="Free-will giving"
+        title="Partner with us"
+        emphasis="What you give supports the teaching, the training of teachers, the workshops and the materials this ministry produces and shares freely."
+      />
 
       <p className="font-serif text-[17px] leading-relaxed">
         This page carries no pressure and no promise of return. Give as you are able, cheerfully,

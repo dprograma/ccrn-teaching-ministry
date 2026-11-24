@@ -26,30 +26,27 @@ export default async function SelahPage() {
   }
 
   return (
-    <div className="mx-auto max-w-xl px-4">
-      <div
-        className="rounded-2xl p-6 text-white mt-4 mb-5 text-center"
-        style={{ background: "linear-gradient(160deg, var(--navy2), var(--navy))" }}
-      >
-        <h1 className="text-[30px] mb-2 text-white font-display font-semibold tracking-wide">
+    <div className="mx-auto max-w-3xl px-4">
+      <div className="bg-soft rounded-2xl p-7 mt-4 mb-5 text-center border border-line">
+        <h1 className="text-[32px] mb-2 text-navy font-display font-semibold tracking-wide">
           SELAH
         </h1>
-        <p className="font-serif italic text-[17px] leading-relaxed opacity-95 m-0">
+        <p className="font-serif italic text-[17px] leading-relaxed text-muted m-0">
           Music to pray and study by
         </p>
       </div>
 
-      <p className="font-serif text-[17px] leading-relaxed">
+      <p className="font-serif text-[17px] leading-relaxed max-w-2xl">
         Selah appears seventy-one times in the Psalms and three times in Habakkuk. It is a musical
         direction, and the old readers understood it as a pause — a lifting up, an instruction to
         stop and weigh what has just been said. That is what this page is for.
       </p>
-      <p className="font-serif text-[17px] leading-relaxed">
+      <p className="font-serif text-[17px] leading-relaxed max-w-2xl">
         Nothing plays until you ask it to. Tap once to begin, and it will keep playing while you
         move through the site.
       </p>
 
-      <div className="bg-soft rounded-2xl p-5 my-5">
+      <div className="bg-soft rounded-2xl p-5 my-5 max-w-2xl">
         <p className="font-serif text-base leading-relaxed m-0">
           <b>A word on silence.</b> The best preparation is sometimes no sound at all.{" "}
           <em>Be still, and know that I am God</em> (Psalm 46:10). Use the music where it helps
@@ -58,7 +55,7 @@ export default async function SelahPage() {
         </p>
       </div>
 
-      <p className="font-serif text-[17px] leading-relaxed">
+      <p className="font-serif text-[17px] leading-relaxed max-w-2xl">
         Songs that preach. Every song gathered here points to Christ and to his finished work —
         not to our striving, not to our fear, not to what we must do to be accepted. Sing them in
         the car, in the kitchen, before the meeting, and let the doctrine go in with the melody.

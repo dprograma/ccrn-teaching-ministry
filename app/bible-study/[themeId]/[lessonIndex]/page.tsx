@@ -40,7 +40,7 @@ export default async function LessonPage({
   const next = index < theme.lessons.length - 1 ? index + 1 : null;
 
   return (
-    <div className="mx-auto max-w-2xl px-4">
+    <div className="mx-auto max-w-3xl px-4">
       <div className="mt-4 mb-1.5">
         <div className="text-[11px] font-bold tracking-[0.14em] uppercase" style={{ color: accent }}>
           {theme.title} · Lesson {index + 1} of {theme.lessons.length}

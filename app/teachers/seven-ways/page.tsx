@@ -1,32 +1,24 @@
 import type { Metadata } from "next";
 import { DEFS, formatRef } from "@/lib/content/curriculum";
 import { SourceBlock } from "@/components/ui/source-block";
+import { Banner } from "@/components/ui/banner";
 
 export const metadata: Metadata = { title: "The Seven Ways of Handling the Word" };
 
 export default function SevenWaysPage() {
   return (
-    <div className="mx-auto max-w-2xl px-4">
-      <div
-        className="rounded-2xl p-5 text-white mt-4 mb-2"
-        style={{ background: "linear-gradient(160deg, var(--navy2), var(--navy))" }}
-      >
-        <div className="text-[11px] tracking-[0.2em] uppercase opacity-80 font-bold">
-          Teacher formation · Module 1
-        </div>
-        <h1 className="text-[26px] mt-1.5 mb-2 text-white font-display font-semibold">
-          Seven Ways of Handling the Word
-        </h1>
-        <div className="font-serif italic text-[16px] leading-relaxed opacity-95">
-          Every teacher in this ministry should know the difference, and be able to say which one
-          he has been asked to do.
-        </div>
-      </div>
+    <div className="mx-auto max-w-5xl px-4">
+      <Banner
+        kicker="Teacher formation · Module 1"
+        title="Seven Ways of Handling the Word"
+        emphasis="Every teacher in this ministry should know the difference, and be able to say which one he has been asked to do."
+      />
 
-      <p className="font-serif text-[17px] leading-relaxed">{DEFS.intro}</p>
+      <p className="font-serif text-[17px] leading-relaxed max-w-2xl">{DEFS.intro}</p>
 
-      {DEFS.items.map((w, i) => (
-        <div key={w.n} className="bg-card border border-line rounded-2xl p-[17px] mb-3">
+      <div className="grid lg:grid-cols-2 gap-4 mt-2">
+        {DEFS.items.map((w, i) => (
+          <div key={w.n} className="bg-card border border-line rounded-2xl p-[17px]">
           <div className="font-display text-[22px] font-bold leading-tight">
             {i + 1}. {w.n}
           </div>
@@ -61,6 +53,7 @@ export default function SevenWaysPage() {
           <SourceBlock pope={w.pope} />
         </div>
       ))}
+      </div>
 
       <h3 className="text-[11.5px] font-bold tracking-[0.14em] uppercase text-muted mt-6 mb-2.5 pb-1.5 border-b border-line">
         At a glance

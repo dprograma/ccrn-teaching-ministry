@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { prisma } from "@/lib/db";
 import { BookCover3D, coverAccent } from "@/components/ebooks/book-cover";
+import { Banner } from "@/components/ui/banner";
 
 export const metadata: Metadata = { title: "eBooks" };
 export const dynamic = "force-dynamic";
@@ -19,20 +20,12 @@ export default async function EbooksPage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4">
-      <div
-        className="rounded-2xl p-5 text-white mt-4 mb-6"
-        style={{ background: "linear-gradient(160deg, var(--navy2), var(--navy))" }}
-      >
-        <div className="text-[11px] tracking-[0.2em] uppercase opacity-80 font-bold">
-          A growing shelf
-        </div>
-        <h1 className="text-[26px] mt-1.5 mb-2 text-white font-display font-semibold">eBooks</h1>
-        <div className="font-serif italic text-[16px] leading-relaxed opacity-95">
-          The ministry&rsquo;s teacher-training material, in book form — read online or download
-          as a PDF.
-        </div>
-      </div>
+    <div className="mx-auto max-w-6xl px-4">
+      <Banner
+        kicker="A growing shelf"
+        title="eBooks"
+        emphasis="The ministry’s teacher-training material, in book form — read online or download as a PDF."
+      />
 
       {dbError && (
         <div className="border border-dashed border-line rounded-2xl p-5 text-center text-muted text-sm leading-relaxed">
@@ -47,7 +40,7 @@ export default async function EbooksPage() {
         </div>
       )}
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-6">
         {books.map((b) => (
           <Link key={b.id} href={`/ebooks/${b.slug}`} className="block">
             <BookCover3D

@@ -37,7 +37,7 @@ export default async function TeachingDetailPage({
   if (!teaching || teaching.status !== "PUBLISHED") notFound();
 
   return (
-    <div className="mx-auto max-w-2xl px-4">
+    <div className="mx-auto max-w-3xl px-4">
       <div className="mt-5 mb-4">
         <div className="flex items-center gap-2 text-[12.5px] text-muted font-semibold mb-1.5">
           {teaching.publishedAt && (

@@ -40,7 +40,7 @@ export default async function WeekPage({
   const next = wi < track.weeks - 1 ? wi + 1 : null;
 
   return (
-    <div className="mx-auto max-w-2xl px-4">
+    <div className="mx-auto max-w-4xl px-4">
       <div className="mt-4 mb-1.5">
         <div className="text-[11px] font-bold tracking-[0.14em] uppercase" style={{ color: accent }}>
           {track.name} · Week {wi + 1} of {track.weeks}
@@ -50,7 +50,7 @@ export default async function WeekPage({
         </h1>
       </div>
 
-      <div className="flex gap-2.5 items-start border-l-[3px] border-claret bg-soft rounded-r-xl p-3 px-3.5 my-3.5 text-[14.5px] leading-snug">
+      <div className="flex gap-2.5 items-start border-l-[3px] border-claret bg-soft rounded-r-xl p-3 px-3.5 my-3.5 text-[14.5px] leading-snug max-w-2xl">
         <b className="text-claret">Syllabus, not the full lesson.</b> The teaching is given live
         in the ministry&rsquo;s training sessions.
       </div>
@@ -58,36 +58,38 @@ export default async function WeekPage({
         Seven classes this week.
       </p>
 
-      {week.c.map((cl, i) => {
-        const isTsf = cl[0].startsWith("TRUTH THAT SETS FREE");
-        const title = isTsf ? cl[0].replace("TRUTH THAT SETS FREE: ", "") : cl[0];
-        return (
-          <div
-            key={i}
-            className={`flex gap-3 items-start rounded-2xl p-3.5 px-4 mb-2 border ${
-              isTsf ? "border-claret bg-soft" : "border-line bg-card"
-            }`}
-          >
-            <span className="w-7 h-7 rounded-lg border-2 border-line grid place-items-center text-[12.5px] font-bold text-muted shrink-0 mt-0.5">
-              {i + 1}
-            </span>
-            <div>
-              {isTsf && (
-                <div className="text-[10.5px] font-bold tracking-[0.12em] uppercase text-claret mb-0.5">
-                  Truth That Sets Free
+      <div className="grid sm:grid-cols-2 gap-2.5">
+        {week.c.map((cl, i) => {
+          const isTsf = cl[0].startsWith("TRUTH THAT SETS FREE");
+          const title = isTsf ? cl[0].replace("TRUTH THAT SETS FREE: ", "") : cl[0];
+          return (
+            <div
+              key={i}
+              className={`flex gap-3 items-start rounded-2xl p-3.5 px-4 border ${
+                isTsf ? "border-claret bg-soft" : "border-line bg-card"
+              }`}
+            >
+              <span className="w-7 h-7 rounded-lg border-2 border-line grid place-items-center text-[12.5px] font-bold text-muted shrink-0 mt-0.5">
+                {i + 1}
+              </span>
+              <div>
+                {isTsf && (
+                  <div className="text-[10.5px] font-bold tracking-[0.12em] uppercase text-claret mb-0.5">
+                    Truth That Sets Free
+                  </div>
+                )}
+                <div className={`font-semibold text-[15.5px] leading-snug ${isTsf ? "text-claret" : ""}`}>
+                  {title}
                 </div>
-              )}
-              <div className={`font-semibold text-[15.5px] leading-snug ${isTsf ? "text-claret" : ""}`}>
-                {title}
+                <div className="font-display text-sm font-semibold text-gold mt-0.5">
+                  {formatRef(cl[1])}
+                </div>
+                <div className="font-serif text-[15px] leading-snug text-muted mt-0.5">{cl[2]}</div>
               </div>
-              <div className="font-display text-sm font-semibold text-gold mt-0.5">
-                {formatRef(cl[1])}
-              </div>
-              <div className="font-serif text-[15px] leading-snug text-muted mt-0.5">{cl[2]}</div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
 
       <div className="flex gap-2.5 flex-wrap my-5">
         {prev !== null && (

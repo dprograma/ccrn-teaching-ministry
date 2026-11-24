@@ -9,7 +9,7 @@ function ThemeCard({ theme }: { theme: Theme }) {
   return (
     <Link
       href={`/bible-study/${theme.id}`}
-      className="block w-full border border-line rounded-2xl overflow-hidden bg-card mb-[11px]"
+      className="block w-full border border-line rounded-2xl overflow-hidden bg-card"
     >
       <div
         className="px-4 py-3.5 flex items-center gap-3 text-white"
@@ -34,25 +34,29 @@ function ThemeCard({ theme }: { theme: Theme }) {
 
 export default function BibleStudyPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4">
-      <p className="text-muted text-sm my-4">
+    <div className="mx-auto max-w-5xl px-4">
+      <p className="text-muted text-sm my-4 max-w-2xl">
         For the whole community. Eight themes, four lessons in each — one theme a month, two a
         quarter.
       </p>
-      {COMMUNITY.map((t) => (
-        <ThemeCard key={t.id} theme={t} />
-      ))}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {COMMUNITY.map((t) => (
+          <ThemeCard key={t.id} theme={t} />
+        ))}
+      </div>
 
-      <h3 className="text-[13px] font-bold tracking-[0.13em] uppercase text-muted mt-8 mb-2.5 pb-1.5 border-b border-line">
+      <h3 className="text-[13px] font-bold tracking-[0.13em] uppercase text-muted mt-10 mb-2.5 pb-1.5 border-b border-line">
         Special sessions &amp; reserve
       </h3>
-      <p className="text-muted text-sm -mt-0.5 mb-3">
+      <p className="text-muted text-sm -mt-0.5 mb-3 max-w-2xl">
         Four further themes from the manual, kept for retreats, special sessions and the seasons
         of the Church year.
       </p>
-      {RESERVE.map((t) => (
-        <ThemeCard key={t.id} theme={t} />
-      ))}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {RESERVE.map((t) => (
+          <ThemeCard key={t.id} theme={t} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -41,7 +41,7 @@ export default async function QaDetailPage({ params }: { params: Promise<{ id: s
   const links = (f.rel ?? []).map(relLink).filter(Boolean) as { href: string; label: string }[];
 
   return (
-    <div className="mx-auto max-w-2xl px-4">
+    <div className="mx-auto max-w-3xl px-4">
       <div className="text-[11.5px] font-bold tracking-[0.13em] uppercase text-gold mt-4 mb-2">
         {f.cat}
       </div>

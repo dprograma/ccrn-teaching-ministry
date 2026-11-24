@@ -51,7 +51,7 @@ export function AdminShell({
           </button>
         </div>
       </aside>
-      <main className="flex-1 p-5 sm:p-8 max-w-4xl">
+      <main className="flex-1 p-5 sm:p-8 max-w-5xl">
         <div className="sm:hidden mb-4 flex items-center justify-between">
           <span className="text-[12.5px] text-muted truncate">{userName}</span>
           <button

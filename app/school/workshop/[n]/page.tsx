@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { WORKSHOP, findSession, formatRef, QA } from "@/lib/content/curriculum";
 import { SourceBlock } from "@/components/ui/source-block";
+import { Banner } from "@/components/ui/banner";
 
 const ACCENTS = ["#13294B", "#8C2F39", "#5B4B8A", "#1E6B5B", "#8E6318", "#2A5A86", "#6B3F8C", "#2E6B3A"];
 
@@ -32,14 +33,13 @@ export default async function SessionPage({ params }: { params: Promise<{ n: str
   const next = s.n < 8 ? s.n + 1 : null;
 
   return (
-    <div className="mx-auto max-w-2xl px-4">
-      <div className="rounded-2xl p-5 text-white mt-4 mb-2" style={{ background: accent }}>
-        <div className="text-[11px] tracking-[0.2em] uppercase opacity-80 font-bold">
-          Workshop session {s.n} of 8
-        </div>
-        <h1 className="text-[26px] mt-1.5 mb-2 text-white font-display font-semibold">{s.t}</h1>
-        <div className="font-serif italic text-[16px] leading-relaxed opacity-95">{s.purpose}</div>
-      </div>
+    <div className="mx-auto max-w-3xl px-4">
+      <Banner
+        color={accent}
+        kicker={`Workshop session ${s.n} of 8`}
+        title={s.t}
+        emphasis={s.purpose}
+      />
 
       <h3 className="text-[11.5px] font-bold tracking-[0.14em] uppercase text-muted mt-6 mb-2.5 pb-1.5 border-b border-line">
         Outline

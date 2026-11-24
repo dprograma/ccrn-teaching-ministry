@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { TEACHERS, findModule, formatRef, QA } from "@/lib/content/curriculum";
 import { SourceBlock } from "@/components/ui/source-block";
+import { Banner } from "@/components/ui/banner";
 
 const ACCENTS = [
   "#13294B", "#8C2F39", "#5B4B8A", "#1E6B5B", "#8E6318",
@@ -34,16 +35,13 @@ export default async function ModulePage({ params }: { params: Promise<{ n: stri
   const nextModule = TEACHERS.modules.find((x) => x.n === m.n + 1);
 
   return (
-    <div className="mx-auto max-w-2xl px-4">
-      <div className="rounded-2xl p-5 text-white mt-4 mb-2" style={{ background: accent }}>
-        <div className="text-[11px] tracking-[0.2em] uppercase opacity-80 font-bold">
-          Module {m.n} · {m.lvl}
-        </div>
-        <h1 className="text-[26px] mt-1.5 mb-2 text-white font-display font-semibold">{m.t}</h1>
-        <div className="font-serif italic text-[16px] leading-relaxed opacity-95">
-          {m.purpose}
-        </div>
-      </div>
+    <div className="mx-auto max-w-3xl px-4">
+      <Banner
+        color={accent}
+        kicker={`Module ${m.n} · ${m.lvl}`}
+        title={m.t}
+        emphasis={m.purpose}
+      />
 
       {m.seven && (
         <Link

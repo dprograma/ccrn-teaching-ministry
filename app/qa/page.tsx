@@ -6,8 +6,8 @@ export const metadata: Metadata = { title: "Questions & Answers" };
 
 export default function QaPage() {
   return (
-    <div className="mx-auto max-w-2xl px-4">
-      <p className="text-muted text-sm my-4">
+    <div className="mx-auto max-w-4xl px-4">
+      <p className="text-muted text-sm my-4 max-w-2xl">
         {QA.intro} Every answer is numbered, so a teacher can simply say &ldquo;Question{" "}
         {QA.items.length}&rdquo; and everyone turns to the same page.
       </p>

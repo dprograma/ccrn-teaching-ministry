@@ -52,33 +52,35 @@ const icon = {
 export default function Home() {
   return (
     <div>
-      <div className="bg-gradient-to-b from-navy2 to-navy text-[#F0EADC] rounded-b-[26px] px-5 pt-6 pb-8 text-center relative overflow-hidden">
-        <Crest className="w-[62px] h-[62px] mx-auto mb-2.5 text-[#F0EADC]" />
-        <div className="text-[10.5px] tracking-[0.24em] uppercase text-goldl font-bold leading-relaxed">
-          Teaching Ministry
-          <br />
-          Catholic Charismatic Renewal
-        </div>
-        <h1 className="font-display text-[clamp(26px,6.4vw,36px)] leading-[1.08] mt-2 font-bold tracking-tight text-white">
-          Knowing Christ and Living the Christian Life
-        </h1>
-        <p className="font-serif italic text-[16.5px] opacity-90 mt-2">
-          Bible Study · Teacher Formation · Workshops
-        </p>
-        <div className="mt-3.5 pt-3 border-t border-white/15 font-display italic text-[17px] text-goldl">
-          Otito dịrị Jesu
-        </div>
-        <div className="text-[11.5px] tracking-[0.07em] opacity-70 mt-1.5 leading-relaxed uppercase">
-          Catholic Church of Epiphany, Ologolo · Lekki, Lagos
+      <div className="bg-gradient-to-b from-navy2 to-navy text-[#F0EADC] rounded-b-[26px] px-5 pt-8 pb-10 text-center relative overflow-hidden">
+        <div className="max-w-2xl mx-auto">
+          <Crest className="w-[62px] h-[62px] mx-auto mb-2.5 text-[#F0EADC]" />
+          <div className="text-[10.5px] tracking-[0.24em] uppercase text-goldl font-bold leading-relaxed">
+            Teaching Ministry
+            <br />
+            Catholic Charismatic Renewal
+          </div>
+          <h1 className="font-display text-[clamp(26px,4.2vw,40px)] leading-[1.08] mt-2 font-bold tracking-tight text-white">
+            Knowing Christ and Living the Christian Life
+          </h1>
+          <p className="font-serif italic text-[16.5px] opacity-90 mt-2">
+            Bible Study · Teacher Formation · Workshops
+          </p>
+          <div className="mt-3.5 pt-3 border-t border-white/15 font-display italic text-[17px] text-goldl">
+            Otito dịrị Jesu
+          </div>
+          <div className="text-[11.5px] tracking-[0.07em] opacity-70 mt-1.5 leading-relaxed uppercase">
+            Catholic Church of Epiphany, Ologolo · Lekki, Lagos
+          </div>
         </div>
       </div>
 
-      <div className="mx-auto max-w-2xl px-4">
+      <div className="mx-auto max-w-6xl px-4">
         <section className="my-6">
           <h2 className="text-[13px] font-bold tracking-[0.13em] uppercase text-muted mb-2.5">
             {SITE.id.ministry}
           </h2>
-          <div className="bg-card border border-line rounded-2xl p-[18px]">
+          <div className="bg-card border border-line rounded-2xl p-[18px] max-w-3xl">
             <p className="font-serif text-base leading-relaxed m-0">{SITE.welcome}</p>
           </div>
         </section>
@@ -87,7 +89,7 @@ export default function Home() {
           <h2 className="text-[13px] font-bold tracking-[0.13em] uppercase text-muted mb-2.5">
             Find your way around
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-[11px]">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[11px]">
             <Tile href="/teachings" icon={icon.teachings} title="Teachings" subtitle="A growing archive of messages" />
             <Tile href="/bible-study" icon={icon.book} title="Bible Study" subtitle={`For the whole community · ${totalLessons} lessons`} />
             <Tile href="/teachers" icon={icon.cap} title="Teach the Teacher" subtitle="Facilitator formation · 9 modules" />
@@ -99,29 +101,32 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="my-6">
-          <h2 className="text-[13px] font-bold tracking-[0.13em] uppercase text-muted mb-2.5">
-            Teacher&rsquo;s guiding question
-          </h2>
-          <div className="bg-soft rounded-2xl p-4 px-[18px]">
-            <p className="font-serif italic text-[16.5px] leading-relaxed m-0">
-              &ldquo;{SITE.guiding}&rdquo;
-            </p>
-          </div>
-        </section>
-
-        <section className="my-6 space-y-3.5">
-          {SITE.prayers.map((p) => (
-            <div key={p.t} className="bg-navy text-[#F0EADC] rounded-2xl p-5 text-center">
-              <div className="text-[10.5px] tracking-[0.2em] uppercase text-goldl font-bold">
-                {p.t}
-              </div>
-              <p className="font-serif italic text-[17px] leading-relaxed mt-2 whitespace-pre-line">
-                {p.b}
+        <div className="grid lg:grid-cols-2 gap-6">
+          <section className="my-2">
+            <h2 className="text-[13px] font-bold tracking-[0.13em] uppercase text-muted mb-2.5">
+              Teacher&rsquo;s guiding question
+            </h2>
+            <div className="bg-soft rounded-2xl p-4 px-[18px]">
+              <p className="font-serif italic text-[16.5px] leading-relaxed m-0">
+                &ldquo;{SITE.guiding}&rdquo;
               </p>
             </div>
-          ))}
-        </section>
+          </section>
+
+          <section className="my-2 space-y-3.5">
+            {SITE.prayers.map((p) => (
+              <div key={p.t} className="bg-soft border border-line rounded-2xl p-5 text-center">
+                <div className="text-[10.5px] tracking-[0.2em] uppercase text-gold font-bold">
+                  {p.t}
+                </div>
+                <p className="font-serif italic text-[17px] leading-relaxed mt-2 whitespace-pre-line text-ink">
+                  {p.b}
+                </p>
+              </div>
+            ))}
+          </section>
+        </div>
+        <div className="h-6" />
       </div>
     </div>
   );
