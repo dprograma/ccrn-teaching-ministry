@@ -1,9 +1,9 @@
-import { saveTeaching } from "@/lib/actions/teachings";
+import { saveTalk } from "@/lib/actions/past-talks";
 
-export function TeachingForm({
-  teaching,
+export function TalkForm({
+  talk,
 }: {
-  teaching?: {
+  talk?: {
     id: string;
     title: string;
     speaker: string | null;
@@ -15,15 +15,15 @@ export function TeachingForm({
   };
 }) {
   return (
-    <form action={saveTeaching} className="space-y-5 max-w-2xl">
-      {teaching && <input type="hidden" name="id" value={teaching.id} />}
+    <form action={saveTalk} className="space-y-5 max-w-2xl">
+      {talk && <input type="hidden" name="id" value={talk.id} />}
 
       <div>
         <label className="block text-[13px] font-semibold mb-1.5">Title</label>
         <input
           name="title"
           required
-          defaultValue={teaching?.title}
+          defaultValue={talk?.title}
           className="w-full p-3 rounded-xl border border-line bg-card"
         />
       </div>
@@ -35,7 +35,7 @@ export function TeachingForm({
           </label>
           <input
             name="speaker"
-            defaultValue={teaching?.speaker ?? ""}
+            defaultValue={talk?.speaker ?? ""}
             className="w-full p-3 rounded-xl border border-line bg-card"
           />
         </div>
@@ -45,7 +45,7 @@ export function TeachingForm({
           </label>
           <input
             name="scripture"
-            defaultValue={teaching?.scripture ?? ""}
+            defaultValue={talk?.scripture ?? ""}
             className="w-full p-3 rounded-xl border border-line bg-card"
           />
         </div>
@@ -57,7 +57,7 @@ export function TeachingForm({
           name="summary"
           required
           rows={2}
-          defaultValue={teaching?.summary}
+          defaultValue={talk?.summary}
           className="w-full p-3 rounded-xl border border-line bg-card"
         />
       </div>
@@ -69,7 +69,7 @@ export function TeachingForm({
         <input
           name="videoUrl"
           type="url"
-          defaultValue={teaching?.videoUrl ?? ""}
+          defaultValue={talk?.videoUrl ?? ""}
           className="w-full p-3 rounded-xl border border-line bg-card"
         />
       </div>
@@ -81,7 +81,7 @@ export function TeachingForm({
         <textarea
           name="body"
           rows={10}
-          defaultValue={teaching?.body ?? ""}
+          defaultValue={talk?.body ?? ""}
           className="w-full p-3 rounded-xl border border-line bg-card"
         />
       </div>
@@ -90,7 +90,7 @@ export function TeachingForm({
         <label className="block text-[13px] font-semibold mb-1.5">Status</label>
         <select
           name="status"
-          defaultValue={teaching?.status ?? "DRAFT"}
+          defaultValue={talk?.status ?? "DRAFT"}
           className="p-3 rounded-xl border border-line bg-card"
         >
           <option value="DRAFT">Draft (not visible on the public site)</option>

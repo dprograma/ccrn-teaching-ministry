@@ -4,9 +4,10 @@ export type NavItem = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Teachings", href: "/teachings" },
+  { label: "Past Talks", href: "/past-talks" },
   { label: "Bible Study", href: "/bible-study" },
-  { label: "Teachers", href: "/teachers" },
+  { label: "Teach the Teacher", href: "/teachers" },
+  { label: "Upcoming Talks", href: "/upcoming-talks" },
   { label: "Q & A", href: "/qa" },
   { label: "School of the Word", href: "/school" },
   { label: "eBooks", href: "/ebooks" },

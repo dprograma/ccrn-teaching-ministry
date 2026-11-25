@@ -3,14 +3,14 @@ import type { Metadata } from "next";
 import { prisma } from "@/lib/db";
 import { Banner } from "@/components/ui/banner";
 
-export const metadata: Metadata = { title: "Teachings" };
+export const metadata: Metadata = { title: "Past Talks" };
 export const dynamic = "force-dynamic";
 
-export default async function TeachingsPage() {
-  let teachings: Awaited<ReturnType<typeof prisma.teaching.findMany>> = [];
+export default async function PastTalksPage() {
+  let talks: Awaited<ReturnType<typeof prisma.teaching.findMany>> = [];
   let dbError = false;
   try {
-    teachings = await prisma.teaching.findMany({
+    talks = await prisma.teaching.findMany({
       where: { status: "PUBLISHED" },
       orderBy: { publishedAt: "desc" },
     });
@@ -22,28 +22,28 @@ export default async function TeachingsPage() {
     <div className="mx-auto max-w-5xl px-4">
       <Banner
         kicker="A growing archive"
-        title="Teachings"
+        title="Past Talks"
         emphasis="Individual messages given in the ministry — added as they are preached, so nothing taught once is lost."
       />
 
       {dbError && (
         <div className="border border-dashed border-line rounded-2xl p-5 text-center text-muted text-sm leading-relaxed">
-          The Teachings archive isn&rsquo;t connected yet. Once the database is live, published
+          The Past Talks archive isn&rsquo;t connected yet. Once the database is live, published
           messages will appear here.
         </div>
       )}
 
-      {!dbError && teachings.length === 0 && (
+      {!dbError && talks.length === 0 && (
         <div className="border border-dashed border-line rounded-2xl p-5 text-center text-muted text-sm leading-relaxed">
-          No teachings published yet. The committee can add the first one from the admin area.
+          No talks published yet. The committee can add the first one from the admin area.
         </div>
       )}
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {teachings.map((t) => (
+        {talks.map((t) => (
           <Link
             key={t.id}
-            href={`/teachings/${t.slug}`}
+            href={`/past-talks/${t.slug}`}
             className="block w-full text-left bg-card border border-line rounded-2xl p-[17px]"
           >
             <div className="flex items-center gap-2 text-[12px] text-muted font-semibold mb-1">

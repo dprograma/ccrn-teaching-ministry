@@ -47,6 +47,12 @@ const icon = {
       <path d="M12 3l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9L6.7 19.5l1.1-6L3.4 9.3l6-.8z" />
     </svg>
   ),
+  calendar: (
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M3 9h18M8 3v4M16 3v4" />
+    </svg>
+  ),
 };
 
 export default function Home() {
@@ -90,7 +96,8 @@ export default function Home() {
             Find your way around
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[11px]">
-            <Tile href="/teachings" icon={icon.teachings} title="Teachings" subtitle="A growing archive of messages" />
+            <Tile href="/past-talks" icon={icon.teachings} title="Past Talks" subtitle="A growing archive of messages" />
+            <Tile href="/upcoming-talks" icon={icon.calendar} title="Upcoming Talks" subtitle="What's coming next, and who's teaching" />
             <Tile href="/bible-study" icon={icon.book} title="Bible Study" subtitle={`For the whole community · ${totalLessons} lessons`} />
             <Tile href="/teachers" icon={icon.cap} title="Teach the Teacher" subtitle="Facilitator formation · 9 modules" />
             <Tile href="/qa" icon={icon.qa} title="Questions & Answers" subtitle="Answers for teachers in the hall" />

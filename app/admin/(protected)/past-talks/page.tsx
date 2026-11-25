@@ -1,28 +1,28 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
-import { deleteTeaching } from "@/lib/actions/teachings";
+import { deleteTalk } from "@/lib/actions/past-talks";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminTeachingsPage() {
-  const teachings = await prisma.teaching.findMany({ orderBy: { createdAt: "desc" } });
+export default async function AdminPastTalksPage() {
+  const talks = await prisma.teaching.findMany({ orderBy: { createdAt: "desc" } });
 
   return (
     <div>
       <div className="flex items-center justify-between mb-5">
-        <h1 className="font-display text-2xl font-semibold">Teachings</h1>
+        <h1 className="font-display text-2xl font-semibold">Past Talks</h1>
         <Link
-          href="/admin/teachings/new"
+          href="/admin/past-talks/new"
           className="px-4 py-2 rounded-full bg-navy text-white text-[13.5px] font-semibold"
         >
-          + New teaching
+          + New talk
         </Link>
       </div>
 
-      {teachings.length === 0 && <p className="text-muted text-sm">Nothing yet.</p>}
+      {talks.length === 0 && <p className="text-muted text-sm">Nothing yet.</p>}
 
       <div className="space-y-2.5">
-        {teachings.map((t) => (
+        {talks.map((t) => (
           <div
             key={t.id}
             className="flex items-center gap-3 bg-card border border-line rounded-xl p-3.5"
@@ -37,7 +37,7 @@ export default async function AdminTeachingsPage() {
               </div>
             </div>
             <Link
-              href={`/admin/teachings/${t.id}`}
+              href={`/admin/past-talks/${t.id}`}
               className="px-3 py-1.5 rounded-full bg-soft text-[12.5px] font-semibold"
             >
               Edit
@@ -45,7 +45,7 @@ export default async function AdminTeachingsPage() {
             <form
               action={async () => {
                 "use server";
-                await deleteTeaching(t.id);
+                await deleteTalk(t.id);
               }}
             >
               <button className="px-3 py-1.5 rounded-full bg-claret/10 text-claret text-[12.5px] font-semibold">

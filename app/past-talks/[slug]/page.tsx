@@ -16,9 +16,9 @@ export async function generateMetadata({
   const { slug } = await params;
   try {
     const t = await getTeaching(slug);
-    return { title: t?.title ?? "Teaching" };
+    return { title: t?.title ?? "Talk" };
   } catch {
-    return { title: "Teaching" };
+    return { title: "Talk" };
   }
 }
 

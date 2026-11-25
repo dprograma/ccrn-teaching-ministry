@@ -19,7 +19,7 @@ async function requireAdmin() {
   return session.user;
 }
 
-export async function saveTeaching(formData: FormData) {
+export async function saveTalk(formData: FormData) {
   const user = await requireAdmin();
 
   const id = (formData.get("id") as string) || undefined;
@@ -36,7 +36,7 @@ export async function saveTeaching(formData: FormData) {
 
   if (id) {
     const existing = await prisma.teaching.findUnique({ where: { id } });
-    if (!existing) throw new Error("Teaching not found.");
+    if (!existing) throw new Error("Talk not found.");
     await prisma.teaching.update({
       where: { id },
       data: {
@@ -73,14 +73,14 @@ export async function saveTeaching(formData: FormData) {
     });
   }
 
-  revalidatePath("/admin/teachings");
-  revalidatePath("/teachings");
-  redirect("/admin/teachings");
+  revalidatePath("/admin/past-talks");
+  revalidatePath("/past-talks");
+  redirect("/admin/past-talks");
 }
 
-export async function deleteTeaching(id: string) {
+export async function deleteTalk(id: string) {
   await requireAdmin();
   await prisma.teaching.delete({ where: { id } });
-  revalidatePath("/admin/teachings");
-  revalidatePath("/teachings");
+  revalidatePath("/admin/past-talks");
+  revalidatePath("/past-talks");
 }

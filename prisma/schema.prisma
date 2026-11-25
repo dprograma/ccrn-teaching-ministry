@@ -26,6 +26,7 @@ model AdminUser {
   teachings Teaching[]
   selah     SelahEntry[]
   photos    NewsPhoto[]
+  talks     TalkAssignment[]
 }
 
 // ── eBooks ──────────────────────────────────────────────────────
@@ -147,4 +148,36 @@ model NewsPhoto {
   createdById String?
   createdBy   AdminUser? @relation(fields: [createdById], references: [id], onDelete: SetNull)
   createdAt   DateTime   @default(now())
+}
+
+// ── Teach the Teacher: roster + Upcoming Talks ──────────────────
+//
+// The public "Teach the Teacher" page itself is still the static
+// nine-module curriculum (lib/content/curriculum.ts) — this roster is
+// a separate, admin-managed list of named teachers, used only as the
+// assignment target for TalkAssignment below.
+
+model Teacher {
+  id     String  @id @default(cuid())
+  name   String
+  active Boolean @default(true)
+
+  talks     TalkAssignment[]
+  createdAt DateTime         @default(now())
+}
+
+model TalkAssignment {
+  id          String   @id @default(cuid())
+  topic       String
+  description String
+  teacherId   String
+  teacher     Teacher  @relation(fields: [teacherId], references: [id], onDelete: Restrict)
+  scheduledAt DateTime // date and time of delivery
+
+  createdById String?
+  createdBy   AdminUser? @relation(fields: [createdById], references: [id], onDelete: SetNull)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([scheduledAt])
 }
