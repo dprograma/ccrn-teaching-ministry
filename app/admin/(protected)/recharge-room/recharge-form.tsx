@@ -1,6 +1,6 @@
-import { saveSelahEntry } from "@/lib/actions/selah";
+import { saveRechargeEntry } from "@/lib/actions/recharge-room";
 
-export function SelahForm({
+export function RechargeForm({
   entry,
 }: {
   entry?: {
@@ -16,7 +16,7 @@ export function SelahForm({
   };
 }) {
   return (
-    <form action={saveSelahEntry} className="space-y-5 max-w-xl">
+    <form action={saveRechargeEntry} className="space-y-5 max-w-xl">
       {entry && <input type="hidden" name="id" value={entry.id} />}
 
       <div>
@@ -112,7 +112,7 @@ export function SelahForm({
 
       <label className="flex items-center gap-2.5">
         <input type="checkbox" name="published" defaultChecked={entry?.published ?? false} />
-        <span className="text-[13.5px] font-semibold">Published (visible on the Selah page)</span>
+        <span className="text-[13.5px] font-semibold">Published (visible on the Recharge Room page)</span>
       </label>
 
       <button

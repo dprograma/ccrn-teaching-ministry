@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
-import { SelahForm } from "../selah-form";
+import { RechargeForm } from "../recharge-form";
 
-export default async function EditSelahEntryPage({
+export default async function EditRechargeEntryPage({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -13,8 +13,8 @@ export default async function EditSelahEntryPage({
 
   return (
     <div>
-      <h1 className="font-display text-2xl font-semibold mb-5">Edit Selah entry</h1>
-      <SelahForm entry={entry} />
+      <h1 className="font-display text-2xl font-semibold mb-5">Edit Recharge Room entry</h1>
+      <RechargeForm entry={entry} />
     </div>
   );
 }

@@ -48,7 +48,7 @@ function EntryRow({ entry }: { entry: PlayableEntry }) {
   );
 }
 
-export function SelahBrowser({
+export function RechargeBrowser({
   study,
   worship,
 }: {

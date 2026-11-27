@@ -5,18 +5,16 @@ export const dynamic = "force-dynamic";
 
 async function counts() {
   try {
-    const [ebooks, pastTalks, selah, photos, teachers, upcomingTalks] = await Promise.all([
-      prisma.eBook.count(),
+    const [pastTalks, selah, photos, teachers, upcomingTalks] = await Promise.all([
       prisma.teaching.count(),
       prisma.selahEntry.count(),
       prisma.newsPhoto.count(),
       prisma.teacher.count(),
       prisma.talkAssignment.count(),
     ]);
-    return { ebooks, pastTalks, selah, photos, teachers, upcomingTalks, ok: true as const };
+    return { pastTalks, selah, photos, teachers, upcomingTalks, ok: true as const };
   } catch {
     return {
-      ebooks: 0,
       pastTalks: 0,
       selah: 0,
       photos: 0,
@@ -31,11 +29,10 @@ export default async function AdminDashboard() {
   const c = await counts();
 
   const tiles = [
-    { href: "/admin/ebooks", label: "eBooks", count: c.ebooks },
     { href: "/admin/past-talks", label: "Past Talks", count: c.pastTalks },
     { href: "/admin/upcoming-talks", label: "Upcoming Talks", count: c.upcomingTalks },
     { href: "/admin/teachers", label: "Teach the Teacher roster", count: c.teachers },
-    { href: "/admin/selah", label: "Selah entries", count: c.selah },
+    { href: "/admin/recharge-room", label: "Recharge Room entries", count: c.selah },
     { href: "/admin/news", label: "News photos", count: c.photos },
   ];
 

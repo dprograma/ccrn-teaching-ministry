@@ -1,50 +1,46 @@
 import Link from "next/link";
 import { prisma } from "@/lib/db";
-import { deleteEbook } from "@/lib/actions/ebooks";
+import { deleteRechargeEntry } from "@/lib/actions/recharge-room";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminEbooksPage() {
-  const books = await prisma.eBook.findMany({
-    orderBy: { position: "asc" },
-    include: { _count: { select: { chapters: true } } },
+export default async function AdminRechargeRoomPage() {
+  const entries = await prisma.selahEntry.findMany({
+    orderBy: [{ section: "asc" }, { position: "asc" }],
   });
 
   return (
     <div>
       <div className="flex items-center justify-between mb-5">
-        <h1 className="font-display text-2xl font-semibold">eBooks</h1>
+        <h1 className="font-display text-2xl font-semibold">Recharge Room entries</h1>
         <Link
-          href="/admin/ebooks/new"
+          href="/admin/recharge-room/new"
           className="px-4 py-2 rounded-full bg-navy text-white text-[13.5px] font-semibold"
         >
-          + New eBook
+          + New entry
         </Link>
       </div>
 
-      {books.length === 0 && (
-        <p className="text-muted text-sm">
-          Nothing yet. Run the seed script for a starting shelf, or create one.
-        </p>
-      )}
+      {entries.length === 0 && <p className="text-muted text-sm">Nothing yet.</p>}
 
       <div className="space-y-2.5">
-        {books.map((b) => (
+        {entries.map((e) => (
           <div
-            key={b.id}
+            key={e.id}
             className="flex items-center gap-3 bg-card border border-line rounded-xl p-3.5"
           >
             <div className="min-w-0 flex-1">
-              <div className="font-semibold text-[15px] truncate">{b.title}</div>
+              <div className="font-semibold text-[15px] truncate">{e.title}</div>
               <div className="text-[12px] text-muted mt-0.5">
-                {b._count.chapters} chapter{b._count.chapters === 1 ? "" : "s"} ·{" "}
-                <span className={b.status === "PUBLISHED" ? "text-ok" : "text-claret"}>
-                  {b.status === "PUBLISHED" ? "Published" : "Draft"}
+                {e.section === "STUDY" ? "Study" : "Worship"} · {e.language} ·{" "}
+                {e.sourceType === "HOSTED" ? "Our own recording" : "Official embed"} ·{" "}
+                <span className={e.published ? "text-ok" : "text-claret"}>
+                  {e.published ? "Published" : "Unpublished"}
                 </span>
               </div>
             </div>
             <Link
-              href={`/admin/ebooks/${b.id}`}
+              href={`/admin/recharge-room/${e.id}`}
               className="px-3 py-1.5 rounded-full bg-soft text-[12.5px] font-semibold"
             >
               Edit
@@ -52,7 +48,7 @@ export default async function AdminEbooksPage() {
             <form
               action={async () => {
                 "use server";
-                await deleteEbook(b.id);
+                await deleteRechargeEntry(e.id);
               }}
             >
               <button className="px-3 py-1.5 rounded-full bg-claret/10 text-claret text-[12.5px] font-semibold">

@@ -23,12 +23,6 @@ const icon = {
       <path d="M9.5 9.5a2.5 2.5 0 1 1 3.3 2.4c-.5.2-.8.7-.8 1.2v.4M12 16.6v.2" />
     </svg>
   ),
-  book3d: (
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinejoin="round">
-      <path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z" />
-      <path d="M18 3v18M7 7h7M7 10h7" />
-    </svg>
-  ),
   selah: (
     <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round">
       <path d="M9 18V5l11-2v13" />
@@ -102,8 +96,7 @@ export default function Home() {
             <Tile href="/teachers" icon={icon.cap} title="Teach the Teacher" subtitle="Facilitator formation · 9 modules" />
             <Tile href="/qa" icon={icon.qa} title="Questions & Answers" subtitle="Answers for teachers in the hall" />
             <Tile href="/school" icon={icon.cap} title="School of the Word" subtitle="4 tracks · 336 classes" />
-            <Tile href="/ebooks" icon={icon.book3d} title="eBooks" subtitle="Read online or download" />
-            <Tile href="/selah" icon={icon.selah} title="Selah" subtitle="Music to pray and study by" />
+            <Tile href="/recharge-room" icon={icon.selah} title="Recharge Room" subtitle="Music to pray and study by" />
             <Tile href="/news" icon={icon.news} title="News" subtitle="What's happening in the ministry" />
           </div>
         </section>

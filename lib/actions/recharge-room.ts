@@ -15,7 +15,7 @@ async function requireAdmin() {
 const LANGUAGES = ["LATIN", "YORUBA", "IGBO", "HAUSA", "ENGLISH"] as const;
 const SECTIONS = ["STUDY", "WORSHIP"] as const;
 
-export async function saveSelahEntry(formData: FormData) {
+export async function saveRechargeEntry(formData: FormData) {
   const user = await requireAdmin();
 
   const id = (formData.get("id") as string) || undefined;
@@ -79,12 +79,12 @@ export async function saveSelahEntry(formData: FormData) {
     await prisma.selahEntry.create({ data: { ...data, position: count, createdById: user.id } });
   }
 
-  revalidatePath("/admin/selah");
-  revalidatePath("/selah");
-  redirect("/admin/selah");
+  revalidatePath("/admin/recharge-room");
+  revalidatePath("/recharge-room");
+  redirect("/admin/recharge-room");
 }
 
-export async function deleteSelahEntry(id: string) {
+export async function deleteRechargeEntry(id: string) {
   await requireAdmin();
   const existing = await prisma.selahEntry.findUnique({ where: { id } });
   await prisma.selahEntry.delete({ where: { id } });
@@ -95,6 +95,6 @@ export async function deleteSelahEntry(id: string) {
       // best-effort cleanup; the row is already gone either way
     }
   }
-  revalidatePath("/admin/selah");
-  revalidatePath("/selah");
+  revalidatePath("/admin/recharge-room");
+  revalidatePath("/recharge-room");
 }

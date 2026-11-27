@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { prisma } from "@/lib/db";
-import { SelahBrowser } from "./selah-browser";
+import { RechargeBrowser } from "./recharge-browser";
 
-export const metadata: Metadata = { title: "Selah" };
+export const metadata: Metadata = { title: "Recharge Room" };
 export const dynamic = "force-dynamic";
 
-export default async function SelahPage() {
+export default async function RechargeRoomPage() {
   let study: Awaited<ReturnType<typeof prisma.selahEntry.findMany>> = [];
   let worship: Awaited<ReturnType<typeof prisma.selahEntry.findMany>> = [];
   let dbError = false;
@@ -29,7 +29,7 @@ export default async function SelahPage() {
     <div className="mx-auto max-w-5xl px-4">
       <div className="bg-soft rounded-2xl p-8 mt-4 mb-6 text-center border border-line">
         <h1 className="text-[34px] mb-2 text-ink font-display font-semibold tracking-wide">
-          SELAH
+          RECHARGE ROOM
         </h1>
         <p className="font-serif italic text-[17px] leading-relaxed text-muted m-0 max-w-md mx-auto">
           Music to pray and study by
@@ -38,9 +38,10 @@ export default async function SelahPage() {
 
       <div className="max-w-2xl mx-auto text-center mb-8">
         <p className="font-serif text-[17px] leading-relaxed">
-          Selah appears seventy-one times in the Psalms and three times in Habakkuk. It is a
-          musical direction, and the old readers understood it as a pause — a lifting up, an
-          instruction to stop and weigh what has just been said. That is what this page is for.
+          This room takes its spirit from &ldquo;Selah&rdquo; — a word that appears seventy-one
+          times in the Psalms and three times in Habakkuk. It is a musical direction, and the old
+          readers understood it as a pause — a lifting up, an instruction to stop and weigh what
+          has just been said. That is what this page is for.
         </p>
         <p className="font-serif text-[17px] leading-relaxed">
           Nothing plays until you ask it to. Tap once to begin, and it will keep playing while you
@@ -88,7 +89,7 @@ export default async function SelahPage() {
       )}
 
       {!dbError && (study.length > 0 || worship.length > 0) && (
-        <SelahBrowser study={study} worship={worship} />
+        <RechargeBrowser study={study} worship={worship} />
       )}
 
       <div className="h-8" />

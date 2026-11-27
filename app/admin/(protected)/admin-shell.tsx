@@ -6,11 +6,10 @@ import { signOut } from "next-auth/react";
 
 const LINKS = [
   { href: "/admin", label: "Dashboard" },
-  { href: "/admin/ebooks", label: "eBooks" },
   { href: "/admin/past-talks", label: "Past Talks" },
   { href: "/admin/upcoming-talks", label: "Upcoming Talks" },
   { href: "/admin/teachers", label: "Teach the Teacher" },
-  { href: "/admin/selah", label: "Selah" },
+  { href: "/admin/recharge-room", label: "Recharge Room" },
   { href: "/admin/news", label: "News photos" },
 ];
 

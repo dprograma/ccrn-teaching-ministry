@@ -1,10 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Source_Serif_4, Inter } from "next/font/google";
 import "./globals.css";
-import { Nav } from "@/components/nav";
-import { Footer } from "@/components/footer";
 import { PlayerProvider } from "@/components/selah/player-context";
-import { SelahPlayerBar } from "@/components/selah/selah-player-bar";
+import { SiteChrome } from "@/components/site-chrome";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -32,7 +30,7 @@ export const metadata: Metadata = {
     template: "%s — Teaching Ministry",
   },
   description:
-    "Knowing Christ and Living the Christian Life — Bible Study, Teacher Formation, Workshops, eBooks and Selah from the Teaching Ministry, Catholic Charismatic Renewal, Catholic Church of Epiphany, Ologolo, Lekki, Lagos.",
+    "Knowing Christ and Living the Christian Life — Bible Study, Teacher Formation, Workshops and the Recharge Room from the Teaching Ministry, Catholic Charismatic Renewal, Catholic Church of Epiphany, Ologolo, Lekki, Lagos.",
 };
 
 export const viewport: Viewport = {
@@ -54,10 +52,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans bg-bg text-ink">
         <PlayerProvider>
-          <Nav />
-          <main className="flex-1 pb-24">{children}</main>
-          <Footer />
-          <SelahPlayerBar />
+          <SiteChrome>{children}</SiteChrome>
         </PlayerProvider>
       </body>
     </html>
